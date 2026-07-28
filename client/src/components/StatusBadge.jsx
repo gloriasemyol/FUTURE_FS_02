@@ -1,0 +1,17 @@
+const statusStyles = {
+  new: 'bg-blue-100 text-blue-700',
+  contacted: 'bg-yellow-100 text-yellow-700',
+  converted: 'bg-green-100 text-green-700',
+};
+
+const StatusBadge = ({ status }) => {
+  return (
+    <span
+      className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${statusStyles[status]}`}
+    >
+      {status}
+    </span>
+  );
+};
+
+export default StatusBadge;
