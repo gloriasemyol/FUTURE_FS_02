@@ -5,6 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const authRoutes = require('./routes/authRoutes');
+const leadRoutes = require('./routes/leadRoutes');
+
 const app = express();
 
 // Middleware
@@ -15,6 +18,10 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('FUTURE_FS_02 Mini CRM Backend is running 🚀');
 });
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/leads', leadRoutes);
 
 // Connect to MongoDB
 mongoose
