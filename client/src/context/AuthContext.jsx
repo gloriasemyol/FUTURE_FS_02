@@ -1,25 +1,56 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => localStorage.getItem('token'));
-  const [isAuthenticated, setIsAuthenticated] = useState(() => Boolean(localStorage.getItem('token')));
+const isTokenValid = (token) => {
+  if (!token) return false;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (!payload.exp) return true;
+    return payload.exp * 1000 > Date.now();
+  } catch (err) {
+    return false;
+  }
+};
 
-  const login = (newToken) => {
-    localStorage.setItem('token', newToken);
+export const AuthProvider = ({ children }) => {
+  const storedToken = localStorage.getItem('token');
+  const validAtStart = isTokenValid(storedToken);
+
+  if (!validAtStart) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+  }
+
+  const [token, setToken] = useState(validAtStart ? storedToken : null);
+  const [username, setUsername] = useState(
+    validAtStart ? localStorage.getItem('username') : null
+  );
+
+  const login = (newToken, newUsername) => {
     setToken(newToken);
-    setIsAuthenticated(true);
+    setUsername(newUsername);
+    localStorage.setItem('token', newToken);
+    localStorage.setItem('username', newUsername);
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
     setToken(null);
-    setIsAuthenticated(false);
+    setUsername(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, token, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        username,
+        login,
+        logout,
+        isAuthenticated: isTokenValid(token),
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

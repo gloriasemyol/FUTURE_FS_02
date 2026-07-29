@@ -1,25 +1,28 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import ContactForm from './pages/ContactForm';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
-export default function App() {
+function App() {
   return (
-    <AuthProvider>
+    <>
+      <Toaster position="top-right" />
       <Routes>
-        {/* Public Route */}
+        <Route path="/" element={<ContactForm />} />
         <Route path="/login" element={<Login />} />
-
-        {/* Protected Routes Wrapper */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-
-        {/* Catch-all redirect */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </AuthProvider>
+    </>
   );
 }
+
+export default App;

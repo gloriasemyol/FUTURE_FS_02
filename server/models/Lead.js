@@ -2,21 +2,10 @@ const mongoose = require('mongoose');
 
 const leadSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-    },
-    source: {
-      type: String,
-      default: 'Website Form',
-    },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String },
+    source: { type: String, default: 'Website Form' },
     status: {
       type: String,
       enum: ['new', 'contacted', 'converted'],

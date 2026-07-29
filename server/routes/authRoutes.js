@@ -1,24 +1,41 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-router.post('/login', (req, res) => {
-  const { username, password } = req.body;
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-  if (username === 'admin' && password === 'password123') {
+    if (!username || !password) {
+      return res.status(400).json({ message: 'Username and password are required.' });
+    }
+
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials.' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid credentials.' });
+    }
+
     const token = jwt.sign(
-      { username: 'admin', role: 'admin' },
-      process.env.JWT_SECRET || 'fallback_secret_key',
-      { expiresIn: '1h' }
+      { id: user._id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       message: 'Login successful',
-      token: token
+      token,
+      username: user.username,
     });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
-
-  return res.status(401).json({ message: 'Invalid credentials' });
 });
 
 module.exports = router;
