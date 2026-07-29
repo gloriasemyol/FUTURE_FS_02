@@ -43,7 +43,6 @@ const Login = () => {
               onChange={(e) => setUsername(e.target.value)}
               required
               className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="admin"
             />
           </div>
 
@@ -57,7 +56,6 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="••••••••"
             />
           </div>
 

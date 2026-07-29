@@ -49,7 +49,6 @@ const ContactForm = () => {
               onChange={handleChange}
               required
               className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="Ravi Kumar"
             />
           </div>
 
@@ -64,7 +63,6 @@ const ContactForm = () => {
               onChange={handleChange}
               required
               className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="ravi@example.com"
             />
           </div>
 
@@ -78,7 +76,6 @@ const ContactForm = () => {
               value={formData.phone}
               onChange={handleChange}
               className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="9876543210"
             />
           </div>
 
