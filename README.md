@@ -1,170 +1,182 @@
-# 🚀 FUTURE_FS_02 – Client Lead Management System (Mini CRM) 💼⚡
+# 💼 FUTURE_FS_02 — Client Lead Management System (Mini CRM)
 
-> 🌟 A full-stack, real-time CRM solution engineered to capture public leads effortlessly and provide administrators with a powerful, secure dashboard for tracking, managing, and converting prospects.
-
----
-
-### 🏆 Intern Project Overview
-Developed with ❤️ as part of the Future Interns – Full Stack Web Development Internship Program (Task 2).
+> A full-stack, real-time CRM solution engineered to capture public leads effortlessly and provide administrators with a powerful, secure dashboard for tracking, managing, and converting prospects.
 
 ---
 
-## 🌐 Live Demo & Deployment
+## ✨ Features
 
-| Platform | Role | Link | Status |
-| :--- | :--- | :--- | :--- |
-| Vercel ⚡ | Frontend UI | [https://future-fs-02.vercel.app](https://future-fs-02.vercel.app) | ![Active](https://img.shields.io/badge/Status-Live-brightgreen?style=flat-square) |
-| Render ⚙️ | Backend API | [https://future-fs-02-api.onrender.com](https://future-fs-02-api.onrender.com) | ![Active](https://img.shields.io/badge/Status-Live-brightgreen?style=flat-square) |
-
-> ⚠️ Note on Free Tier Hosting: The backend API hosted on Render spins down during inactivity. The initial request may take 30–50 seconds to wake up the server.
-
----
-
-## ✨ Outstanding Features
-
-- 📋 Public Lead Capture Form – Frictionless form for potential clients (Name, Email, Phone, Source).
-- 🔐 Secure Admin Authentication – Password encryption via bcryptjs and stateless session handling using JWT.
-- 📊 Real-Time Analytics Dashboard – Visual metric cards displaying Total, New, Contacted, and Converted leads.
-- ➕ Manual Lead Entry Modal – Admin modal to manually input leads from phone calls or external channels.
-- 🔍 Smart Search & Debouncing – Dynamic filtering by lead name or email with integrated debouncing for low latency.
-- 🎯 Status Categorization – Quick filtering by lead status (New, Contacted, Converted).
-- 🔄 Inline Lead Updates – Seamless, one-click status transitions directly within the table view.
-- 📝 Interactive Notes Drawer – Time-stamped internal follow-up notes for team tracking.
-- 🎨 Responsive UI/UX – Designed with modern Tailwind CSS for desktop and mobile responsiveness.
-- 🔔 Toast Feedback Systems – Instant visual notifications via react-hot-toast.
-- ⏳ Skeleton Loading States – Polished loading skeletons for enhanced perceived performance.
+- 📋 **Public Lead Capture Form**: Frictionless form for potential clients to submit inquiries with automatic database ingestion.
+- 🔐 **Secure Admin Portal**: Password encryption via bcryptjs and stateless session management powered by JSON Web Tokens (JWT).
+- 📊 **Real-Time Analytics Dashboard**: Visual metric cards displaying metrics for total, new, contacted, and converted leads.
+- 🔍 **Smart Search & Filtering**: Dynamic lead filtering by name or email with integrated debouncing for minimal latency.
+- 📝 **Interactive Notes Drawer**: Time-stamped internal follow-up notes system for seamless client tracking.
 
 ---
 
-## 🛠️ Tech Stack & Ecosystem
+## 🛠️ Tech Stack
 
-```
-  ┌─────────────────────────────────────────────────────────┐
-  │                   MERN STACK ARCHITECTURE               │
-  ├─────────────────────────────────────────────────────────┤
-  │  💻 Frontend  :: React 18, Tailwind CSS, Vite           │
-  │  ⚙️ Backend   :: Node.js, Express.js                    │
-  │  🗄️ Database  :: MongoDB Atlas, Mongoose ODM            │
-  │  🔑 Auth      :: JSON Web Tokens (JWT), BcryptJS        │
-  │  ☁️ Cloud     :: Vercel (Frontend), Render (Backend)     │
-  └─────────────────────────────────────────────────────────┘
-```
+### Frontend
+- ⚛️ React.js (Scaffolded via Vite)
+- 🎨 Tailwind CSS
+- 🧩 Axios & React Hot Toast
+
+### Backend
+- 🟢 Node.js
+- ⚡ Express.js
+- 🔑 JSON Web Tokens (JWT) & BcryptJS
+
+### Database & Tools
+- 🍃 MongoDB Atlas
+- 📦 Mongoose ODM
 
 ---
 
-## 📁 Repository Directory Structure
+## 🚀 Live Demo & Deployment
+
+- 🔺 **Frontend Live App (Vercel)**: [https://future-fs-02-three-liard.vercel.app](https://future-fs-02-three-liard.vercel.app)
+- 🟣 **Backend Live Service (Render)**: [https://future-fs-02-api-7l8f.onrender.com](https://future-fs-02-api-7l8f.onrender.com)
+
+---
+
+## 📁 Project Structure
 
 ```text
 FUTURE_FS_02/
-├── 📁 client/                # React Frontend (Vite)
-│   ├── 📁 src/
-│   │   ├── 📁 api/           # Axios instance & interceptors
-│   │   ├── 📁 components/    # StatsCards, SearchFilterBar, LeadsTable, NotesDrawer, AddLeadModal
-│   │   ├── 📁 context/       # AuthContext for global login state
-│   │   └── 📁 pages/         # ContactForm (Public), Login, Dashboard
-│   ├── 📄 .env               # Client environment configurations
-│   └── 📄 package.json
-│
-└── 📁 server/                # Node.js / Express Backend API
-    ├── 📁 middleware/        # JWT Authentication protection
-    ├── 📁 models/            # Lead.js, User.js (Mongoose Schemas)
-    ├── 📁 routes/            # authRoutes.js, leadRoutes.js
-    ├── 📁 scripts/           # createAdmin.js (One-time seeding script)
-    ├── 📄 .env               # Server environment configurations
-    ├── 📄 server.js          # Express app initialization & DNS configuration
-    └── 📄 package.json
+├── server/
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   ├── models/
+│   │   ├── Lead.js
+│   │   └── User.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   └── leadRoutes.js
+│   ├── scripts/
+│   │   └── createAdmin.js
+│   ├── .env
+│   ├── package.json
+│   └── server.js
+├── client/
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── axiosInstance.js
+│   │   ├── components/
+│   │   │   ├── AddLeadModal.jsx
+│   │   │   ├── LeadsTable.jsx
+│   │   │   ├── NotesDrawer.jsx
+│   │   │   ├── SearchFilterBar.jsx
+│   │   │   └── StatsCards.jsx
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   ├── pages/
+│   │   │   ├── ContactForm.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   └── Login.jsx
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── .env
+│   ├── package.json
+│   ├── tailwind.config.js
+│   └── vite.config.js
+└── README.md
 ```
 
 ---
 
-## 💻 Local Setup Instructions
+## 💻 Local Installation & Setup
 
-### 📌 Prerequisites
-- 🟢 Node.js (v18.0.0 or higher)
-- 🍃 MongoDB Atlas database connection string
+### 📋 Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+- MongoDB Atlas connection string
 
----
-
-### 1️⃣ Clone Repository
+### 1. Clone the repository
 ```bash
-git clone [https://github.com/gloriasemyol/FUTURE_FS_02.git](https://github.com/gloriasemyol/FUTURE_FS_02.git)
+git clone https://github.com/gloriasemyol/FUTURE_FS_02.git
 cd FUTURE_FS_02
 ```
 
----
-
-### 2️⃣ Backend Configuration & Startup
+### 2. Setup Backend
 ```bash
 cd server
 npm install
 ```
 
-Create a .env file in the server/ root directory:
+Create a `.env` file inside the `server` directory:
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_atlas_connection_string
+MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_super_secret_jwt_key
 CLIENT_URL=http://localhost:5173
 ```
 
-Execute the admin creation script (Run once to seed your admin login):
+Execute the admin creation script (run once to seed your admin login):
 ```bash
 node scripts/createAdmin.js
 ```
 
-Start the backend server in development mode:
+Start the backend server:
 ```bash
 npm run dev
 ```
 
----
-
-### 3️⃣ Frontend Configuration & Startup
-Open a new terminal window:
+### 3. Setup Frontend
 ```bash
-cd client
+cd ../client
 npm install
 ```
 
-Create a .env file in the client/ root directory:
+Create a `.env` file inside the `client` directory:
 ```env
 VITE_API_BASE_URL=http://localhost:5000/api
 ```
 
-Launch the Vite development server:
+Start the Vite development server:
 ```bash
 npm run dev
 ```
 
----
-
-### 4️⃣ Local Access Points
-- 🌐 Public Contact Form: http://localhost:5173/
-- 🔒 Admin Portal Login: http://localhost:5173/login
-- 📊 CRM Admin Dashboard: http://localhost:5173/dashboard
+Open `http://localhost:5173` in your browser! 🚀
 
 ---
 
-## 🔑 REST API Reference
+## 🌐 Production Deployment Steps
 
-| HTTP Method | API Endpoint | Access Level | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` 🔐 | `/api/auth/login` | Public | Authenticates credentials & returns JWT bearer token |
-| `POST` 📥 | `/api/leads` | Public / Admin | Captures new lead submissions into MongoDB |
-| `GET` 📊 | `/api/leads` | Admin | Fetches leads list (Supports `?search=` and `?status=`) |
-| `GET` 📈 | `/api/leads/stats` | Admin | Computes totals across lead status metrics |
-| `PATCH` 🔄 | `/api/leads/:id/status` | Admin | Updates lead workflow state (New, Contacted, Converted) |
-| `POST` 📝 | `/api/leads/:id/notes` | Admin | Appends a timestamped internal follow-up note |
+### 🟣 Backend Deployment (Render)
+1. Create a new Web Service on Render and connect your repository.
+2. Root Directory: `server`
+3. Build Command: `npm install`
+4. Start Command: `node server.js`
+5. Set Environment Variables:
+   - `MONGO_URI`
+   - `JWT_SECRET`
+   - `CLIENT_URL` = `[https://future-fs-02-three-liard.vercel.app](https://future-fs-02-three-liard.vercel.app)`
+
+### 🔺 Frontend Deployment (Vercel)
+1. Create a new Project on Vercel and import your repository.
+2. Framework Preset: `Vite`
+3. Root Directory: `client`
+4. Build Command: `npm run build`
+5. Output Directory: `dist`
+6. Set Environment Variable:
+   - `VITE_API_BASE_URL` = `[https://future-fs-02-api-7l8f.onrender.com/api](https://future-fs-02-api-7l8f.onrender.com/api)`
 
 ---
 
-## 👤 Author
+## ⚙️ Environment Variables
 
-Gloria ✨
-- 🐙 GitHub: [@gloriasemyol](https://github.com/gloriasemyol)
+| Variable | Location | Description |
+| :--- | :--- | :--- |
+| `PORT` | server/.env | Port number for the Express server |
+| `MONGO_URI` | server/.env / Render | Database connection string |
+| `JWT_SECRET` | server/.env / Render | Secret key used for signing JWT tokens |
+| `CLIENT_URL` | server/.env / Render | Frontend production URL allowed for CORS |
+| `VITE_API_BASE_URL` | client/.env / Vercel | Production backend API endpoint URL |
 
 ---
 
-<p center="align">
-  <i>Made with 💜 for Future Interns Development Program</i>
-</p>
+## 📝 License
+
+Distributed under the MIT License.
+```
